@@ -16,11 +16,17 @@ import java.util.PriorityQueue;
 public class Algoritmos {
     ArrayList<Punto> vertices;
     ArrayList<Arista> arbol;
+    ConjuntoTrucado cVertices;
+    ConjuntoTrucado descubiertos;
     
     public Algoritmos( ArrayList<Punto> v){
         vertices = v;
+        cVertices = new ConjuntoTrucado(v, true);
+        descubiertos = new ConjuntoTrucado(v, false);
+        arbol = new ArrayList<Arista>();
     }
     public void Prim(){
+        /*
         while(conjunto de vertices no este vacio){
             vertice i expande sus aristas que no conecte con un vertice ya añadido
                     for todas las aristas almacenadas{
@@ -48,5 +54,27 @@ public class Algoritmos {
             ver.quitar(verticeporelquevamos)
                     
         }
+        
+        */
+        PriorityQueue<Arista> colaristas = new PriorityQueue<Arista>(vertices.size() ^ vertices.size(),new AristasC());
+        
+        Punto verticeI = vertices.get(0);
+        descubiertos.poner(verticeI);
+        while(!cVertices.vacio()){
+            for (int i = 0; i < vertices.size(); i++) {
+                if(!descubiertos.esta(vertices.get(i))){
+                    colaristas.add(new Arista(verticeI,vertices.get(i)));
+                }
+                Arista aristaañadida = colaristas.poll();
+                arbol.add(aristaañadida);
+                
+                verticeI = aristaañadida.destino;
+                descubiertos.poner(verticeI);
+                cVertices.quitar(verticeI);
+                
+            }
+            
+        }
+        
     }
 }

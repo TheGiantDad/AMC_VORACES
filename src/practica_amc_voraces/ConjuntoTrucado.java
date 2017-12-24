@@ -6,30 +6,36 @@
 package practica_amc_voraces;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  *
  * @author Usuario
  */
 public class ConjuntoTrucado {
-    ArrayList<Object> elem;
-    boolean [] b;
+    Hashtable<Punto, Boolean> c=null;
+    
     int nelem = 0;
     
-    public ConjuntoTrucado(ArrayList<Object> elem,boolean lleno){
-        this.elem = elem;
-        b = new boolean[elem.size()];
-        if(lleno){
-            for (int i = 0; i < elem.size(); i++) {
-                b[i]= true;
-            }
-            nelem = elem.size();
+    public ConjuntoTrucado(ArrayList<Punto> elem,boolean lleno){
+        c = new Hashtable<Punto,Boolean>();
+        for (int i = 0; i < elem.size(); i++) {
+            c.put( elem.get(i), lleno);
         }
+        if(lleno) nelem = elem.size();
     }
     public boolean vacio(){
         return (nelem==0);
     }
-    int traductor(Punto p){
-        encapsulacion del punto
+    public boolean esta(Punto p){
+        return c.get(p);
+    }
+    public void poner(Punto p){
+        c.put(p,true);
+        nelem++;
+    }
+     public void quitar(Punto p){
+        c.put(p,false);
+        nelem--;
     }
 }
