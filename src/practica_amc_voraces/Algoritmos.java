@@ -13,6 +13,12 @@ import java.util.PriorityQueue;
  *
  * @author Usuario
  */
+
+class padres{
+    Punto hijo;
+    Punto padre;
+}
+      
 public class Algoritmos {
     ArrayList<Punto> vertices;
     ArrayList<Arista> arbol;
@@ -25,7 +31,7 @@ public class Algoritmos {
         descubiertos = new ConjuntoTrucado(v, false);
         arbol = new ArrayList<Arista>();
     }
-    public void Prim(){
+    public boolean Prim(){
         /*
         while(conjunto de vertices no este vacio){
             vertice i expande sus aristas que no conecte con un vertice ya añadido
@@ -75,6 +81,52 @@ public class Algoritmos {
             }
             
         }
+        return arbol.size() == (vertices.size() - 1);
         
+    }
+    public boolean kruskal(ArrayList<Arista> a){//se le pasan todas las combinaciones de aristas ordenadas por su peso O(N^2)
+        padres [] tabla = new padres[vertices.size()];
+        for (int i = 0; i < vertices.size(); i++) {
+            tabla[i].hijo = vertices.get(i);
+            tabla[i].padre =  vertices.get(i);
+        }
+        int i = 0;
+        while(descubiertos.nelem < vertices.size()) {
+            
+            Punto origen = a.get(i).origen;
+            Punto destino = a.get(i).destino;
+            int idorigen=0,iddestino=0;
+            for (int j = 0; j < vertices.size(); j++) {
+                if(vertices.get(j).equals(origen)) idorigen = j;
+                if(vertices.get(j).equals(destino)) iddestino = j;
+            }
+            if(!(tabla[idorigen].padre.equals(tabla[iddestino].padre))){
+                arbol.add(a.get(i));
+                tabla[idorigen].padre = tabla[iddestino].padre;
+                descubiertos.poner(origen);
+                descubiertos.poner(destino);
+            }
+        
+            
+            
+            i++;
+        }
+        return arbol.size() == (vertices.size() - 1);
+        /*
+        for (int i = 0; i < a.size(); i++) {
+            Punto origen = a.get(i).origen;
+            Punto destino = a.get(i).destino;
+            int idorigen=0,iddestino=0;
+            for (int j = 0; j < vertices.size(); j++) {
+                if(vertices.get(j).equals(origen)) idorigen = j;
+                if(vertices.get(j).equals(destino)) iddestino = j;
+            }
+            if(!(tabla[idorigen].padre.equals(tabla[iddestino].padre))){
+                arbol.add(a.get(i));
+                tabla[idorigen].padre = tabla[iddestino].padre;
+                cVertices.poner(origen);
+                cVertices.poner(destino);
+            }
+        }*/
     }
 }

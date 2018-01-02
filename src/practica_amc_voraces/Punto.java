@@ -49,6 +49,9 @@ public class Punto {
     public static double distancia(Punto p1, Punto p2){
         return sqrt(((p2.x-p1.x)*(p2.x-p1.x))+((p2.y-p1.y)*(p2.y-p1.y)));
     }
+    public static boolean equals(Punto p1, Punto p2){
+        return ((p1.x == p2.x)&&(p1.y == p2.y));
+    }
     
 }
 

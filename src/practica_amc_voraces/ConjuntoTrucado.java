@@ -31,11 +31,13 @@ public class ConjuntoTrucado {
         return c.get(p);
     }
     public void poner(Punto p){
+        if(!c.get(p))nelem++;
         c.put(p,true);
-        nelem++;
+       
     }
      public void quitar(Punto p){
+        if(c.get(p))nelem--;
         c.put(p,false);
-        nelem--;
+        
     }
 }
