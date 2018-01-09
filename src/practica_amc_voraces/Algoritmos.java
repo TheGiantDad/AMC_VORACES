@@ -62,7 +62,9 @@ public class Algoritmos {
         }
         
         */
-        PriorityQueue<Arista> colaristas = new PriorityQueue<Arista>(vertices.size() ^ vertices.size(),new AristasC());
+        AristasC comparador = new AristasC();
+        
+        PriorityQueue<Arista> colaristas = new PriorityQueue<Arista>(vertices.size(),comparador);
         
         Punto verticeI = vertices.get(0);
         descubiertos.poner(verticeI);
@@ -129,4 +131,28 @@ public class Algoritmos {
             }
         }*/
     }
+    
+    
+    public ArrayList<Arista> todasAristas(ArrayList<Punto> t){
+    
+        ArrayList<Arista> a= new ArrayList<Arista>();
+        
+        
+        for (int i = 0; i < t.size(); i++) {
+            for (int j = 0; j < t.size(); j++) {
+                if(j>i){
+                    Arista aux= new Arista(t.get(i), t.get(j));
+                    a.add(aux);
+    
+                }
+            }
+            
+            
+        }
+        
+        return a;  
+    }
+    
+    
+    
 }
