@@ -52,6 +52,10 @@ public class Punto {
     public static boolean equals(Punto p1, Punto p2){
         return ((p1.x == p2.x)&&(p1.y == p2.y));
     }
+    public String toString(){
+        String a = new String(" "+x+" "+y+" ");
+        return a ;
+    }
     
 }
 

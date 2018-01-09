@@ -21,33 +21,42 @@ public class PRACTICA_AMC_VORACES {
      */
 
     public static void main(String[] args) throws NumberFormatException, IOException {
-        
-       System.out.println("empezando main");
+        /*
+        System.out.println("empezando main");
 
         ArrayList<Punto> t= new ArrayList<Punto>();
         t=leerArchivo("berlin52.tsp",52);//NOMBRE ARCHIVO + NUMERO DE PUNTOS(TAMAÑO)
         
         Algoritmos al=new Algoritmos(t);
-        /*if(al.Prim()==true)System.out.println("true");
-        else System.out.println("false");*/
+        if(al.Prim()==true)System.out.println("true");
+        else System.out.println("false");
         
         
         System.out.println(al.todasAristas(t).size());
-        al.kruskal(al.todasAristas(t));
+        
+        
+        for (int i = 0; i < al.arbol.size(); i++) {
+            System.out.println("Origen: "+al.arbol.get(i).origen +" Destino: "+al.arbol.get(i).destino + " Coste: "+al.arbol.get(i).distancia);
+        }
+        */
+        ArrayList<Punto> t = new ArrayList<Punto>();
+        Punto p1 =new Punto(1,0);
+        Punto p2 =new Punto(2,0);
+        Punto p3 =new Punto(3,0);
+        Punto p4 =new Punto(4,0);
+        Punto p5 =new Punto(5,0);
+        t.add(p1);
+        t.add(p2);
+        t.add(p3);
+        t.add(p4);
+        t.add(p5);
+        ConjuntoTrucado c = new ConjuntoTrucado(t, true);
+        
+        c.quitar(new Punto(1,0));
+        if(c.esta(new Punto(1,0))) System.out.println("hay problemas");
         
         
         
-        /*System.out.println("solucion rapida: "+al.s.dist);
-        al.SolucionLenta();
-        
-        System.out.println("solucion lenta: "+al.s.dist);*/
-       
-        
-        
-        
-       /* for (int i = 0; i < t.size(); i++) {
-            System.out.println(t.get(i).x+" "+t.get(i).y);
-        }*/
      
     }
     

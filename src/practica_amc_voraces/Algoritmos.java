@@ -17,6 +17,10 @@ import java.util.PriorityQueue;
 class padres{
     Punto hijo;
     Punto padre;
+    padres(Punto hijo,Punto padre){
+        this.hijo=hijo;
+        this.padre=padre;
+    }
 }
       
 public class Algoritmos {
@@ -32,36 +36,7 @@ public class Algoritmos {
         arbol = new ArrayList<Arista>();
     }
     public boolean Prim(){
-        /*
-        while(conjunto de vertices no este vacio){
-            vertice i expande sus aristas que no conecte con un vertice ya añadido
-                    for todas las aristas almacenadas{
-                        escoger la de menor coste "c" 
-                    }
-                    quitamos c y la ponemos en el conjunto del arbol
-                    i = vertice descubierto;
-                    añadir i al arbol
-                    
-        }
         
-        
-        
-        cola de prioridad aristas = new cola...(inicialmente vacia)
-        Conjunto<vertices> ver = new Conjunto<vertices>(array list de todos los vertices)
-        arraylist aristas finales;
-        while(!ver.empty()){
-            for(int i = 0; i < numero de vertices ; i++) {
-               if(ver.esta(vertice[i] )
-               cola prioridad<Aristas> s.add (new vertice(verticeporelquevamos,vertice[i],distancia(verticeporelquevamos,vertice[i])))
-                       
-            }
-            conjuntoaristasfinales.añadir(s.desencolar())
-            verticeporelquevamos= el destino de lo desencolado;
-            ver.quitar(verticeporelquevamos)
-                    
-        }
-        
-        */
         AristasC comparador = new AristasC();
         
         PriorityQueue<Arista> colaristas = new PriorityQueue<Arista>(vertices.size(),comparador);
@@ -71,7 +46,9 @@ public class Algoritmos {
         while(!cVertices.vacio()){
             for (int i = 0; i < vertices.size(); i++) {
                 if(!descubiertos.esta(vertices.get(i))){
-                    colaristas.add(new Arista(verticeI,vertices.get(i)));
+                    Arista al = new Arista(verticeI,vertices.get(i));
+                    colaristas.add(al);
+                    System.out.println("Origen: "+al.origen +" Destino: "+al.destino + " Coste: "+al.distancia);
                 }
                 Arista aristaañadida = colaristas.poll();
                 arbol.add(aristaañadida);
@@ -87,10 +64,10 @@ public class Algoritmos {
         
     }
     public boolean kruskal(ArrayList<Arista> a){//se le pasan todas las combinaciones de aristas ordenadas por su peso O(N^2)
-        padres [] tabla = new padres[vertices.size()];
+        
+        ArrayList<padres> tabla = new ArrayList<padres>();
         for (int i = 0; i < vertices.size(); i++) {
-            tabla[i].hijo = vertices.get(i);
-            tabla[i].padre =  vertices.get(i);
+            tabla.add(new padres(vertices.get(i),vertices.get(i)));
         }
         int i = 0;
         while(descubiertos.nelem < vertices.size()) {
@@ -102,9 +79,9 @@ public class Algoritmos {
                 if(vertices.get(j).equals(origen)) idorigen = j;
                 if(vertices.get(j).equals(destino)) iddestino = j;
             }
-            if(!(tabla[idorigen].padre.equals(tabla[iddestino].padre))){
+            if(!(tabla.get(idorigen).padre.equals(tabla.get(iddestino).padre))){
                 arbol.add(a.get(i));
-                tabla[idorigen].padre = tabla[iddestino].padre;
+                tabla.get(idorigen).padre = tabla.get(iddestino).padre;
                 descubiertos.poner(origen);
                 descubiertos.poner(destino);
             }
