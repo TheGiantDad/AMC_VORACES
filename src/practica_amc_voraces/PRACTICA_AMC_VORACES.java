@@ -26,11 +26,13 @@ public class PRACTICA_AMC_VORACES {
         System.out.println("empezando main");
 
         ArrayList<Punto> t= new ArrayList<Punto>();
-        t=leerArchivo("d493.tsp",493);//NOMBRE ARCHIVO + NUMERO DE PUNTOS(TAMAÑO)
+        t=leerArchivo("ch150.tsp",150);//NOMBRE ARCHIVO + NUMERO DE PUNTOS(TAMAÑO)
         
         Algoritmos al=new Algoritmos(t);
-        if(al.Prim()==true)System.out.println("true");
+        if(al.Kruskal()==true)System.out.println("true");
+        //if(al.Prim()==true)System.out.println("true");
         else System.out.println("false");
+        System.out.println(al.arbol.size());
         
         
         
