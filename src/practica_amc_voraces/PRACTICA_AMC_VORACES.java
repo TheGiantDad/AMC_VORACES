@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  *
@@ -21,24 +22,26 @@ public class PRACTICA_AMC_VORACES {
      */
 
     public static void main(String[] args) throws NumberFormatException, IOException {
-        /*
+        
         System.out.println("empezando main");
 
         ArrayList<Punto> t= new ArrayList<Punto>();
-        t=leerArchivo("berlin52.tsp",52);//NOMBRE ARCHIVO + NUMERO DE PUNTOS(TAMAÑO)
+        t=leerArchivo("d493.tsp",493);//NOMBRE ARCHIVO + NUMERO DE PUNTOS(TAMAÑO)
         
         Algoritmos al=new Algoritmos(t);
         if(al.Prim()==true)System.out.println("true");
         else System.out.println("false");
         
         
-        System.out.println(al.todasAristas(t).size());
+        
         
         
         for (int i = 0; i < al.arbol.size(); i++) {
             System.out.println("Origen: "+al.arbol.get(i).origen +" Destino: "+al.arbol.get(i).destino + " Coste: "+al.arbol.get(i).distancia);
         }
-        */
+        
+        
+        /*
         ArrayList<Punto> t = new ArrayList<Punto>();
         Punto p1 =new Punto(1,0);
         Punto p2 =new Punto(2,0);
@@ -50,12 +53,18 @@ public class PRACTICA_AMC_VORACES {
         t.add(p3);
         t.add(p4);
         t.add(p5);
-        ConjuntoTrucado c = new ConjuntoTrucado(t, true);
         
-        c.quitar(new Punto(1,0));
-        if(c.esta(new Punto(1,0))) System.out.println("hay problemas");
+        Hashtable<Punto,Boolean> c = new Hashtable<Punto,Boolean>();
         
+        for (int i = 0; i < t.size(); i++) {
+            c.put(t.get(i), true);
+        }
         
+        if(c.get(t.get(3))) System.out.println("todo bine");
+        ConjuntoTrucado c = new ConjuntoTrucado(t, false);
+        c.poner(p5);
+        if(c.esta(p5)) System.out.println("todo bien");
+        */
         
      
     }

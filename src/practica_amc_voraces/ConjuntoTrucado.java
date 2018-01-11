@@ -28,7 +28,8 @@ public class ConjuntoTrucado {
         return (nelem==0);
     }
     public boolean esta(Punto p){
-        return c.get(p);
+        boolean r = c.get(p);
+        return r;
     }
     public void poner(Punto p){
         if(!c.get(p))nelem++;
@@ -36,7 +37,7 @@ public class ConjuntoTrucado {
        
     }
      public void quitar(Punto p){
-         c.pu
+        
         if(c.get(p))nelem--;
         c.put(p,false);
         

@@ -31,6 +31,7 @@ public class Algoritmos {
     
     public Algoritmos( ArrayList<Punto> v){
         vertices = v;
+        //System.out.println("el conjunto tiene "+v.size()+" putnos");
         cVertices = new ConjuntoTrucado(v, true);
         descubiertos = new ConjuntoTrucado(v, false);
         arbol = new ArrayList<Arista>();
@@ -42,22 +43,30 @@ public class Algoritmos {
         PriorityQueue<Arista> colaristas = new PriorityQueue<Arista>(vertices.size(),comparador);
         
         Punto verticeI = vertices.get(0);
+        //System.out.println(verticeI.x+" "+verticeI.y);
         descubiertos.poner(verticeI);
+        cVertices.quitar(verticeI);
         while(!cVertices.vacio()){
             for (int i = 0; i < vertices.size(); i++) {
                 if(!descubiertos.esta(vertices.get(i))){
                     Arista al = new Arista(verticeI,vertices.get(i));
                     colaristas.add(al);
-                    System.out.println("Origen: "+al.origen +" Destino: "+al.destino + " Coste: "+al.distancia);
+                    //System.out.println("Origen: "+al.origen +" Destino: "+al.destino + " Coste: "+al.distancia);
                 }
-                Arista aristaañadida = colaristas.poll();
+            }
+                Arista aristaañadida= null;
+                do{
+                     aristaañadida = colaristas.poll();
+                }while(descubiertos.esta(aristaañadida.destino));
+                
                 arbol.add(aristaañadida);
                 
                 verticeI = aristaañadida.destino;
                 descubiertos.poner(verticeI);
                 cVertices.quitar(verticeI);
                 
-            }
+                
+            
             
         }
         return arbol.size() == (vertices.size() - 1);
