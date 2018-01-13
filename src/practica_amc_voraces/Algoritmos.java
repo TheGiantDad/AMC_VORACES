@@ -76,14 +76,15 @@ public class Algoritmos {
     }
 }
     public boolean Kruskal(){//se le pasan todas las combinaciones de aristas ordenadas por su peso O(N^2)
+        UnionFind.MakeSet(vertices.size());
         ArrayList<Arista> a= todasAristas(vertices);
         ArrayList<padres> tabla = new ArrayList<padres>();
         for (int i = 0; i < vertices.size(); i++) {
             tabla.add(new padres(vertices.get(i),vertices.get(i)));
         }
-        int i = 0;
         
-        while(descubiertos.nelem < vertices.size()) {
+        
+        for(int i = 0; i < a.size();i++){
             
             Punto origen = a.get(i).origen;
             Punto destino = a.get(i).destino;
@@ -92,16 +93,17 @@ public class Algoritmos {
                 if(vertices.get(j).equals(origen)) idorigen = j;
                 if(vertices.get(j).equals(destino)) iddestino = j;
             }
-            if(!(tabla.get(idorigen).padre.equals(tabla.get(iddestino).padre))){
+            if(!(UnionFind.sameComponent(idorigen, iddestino))){
                 arbol.add(a.get(i));
-                tabla.get(idorigen).padre = tabla.get(iddestino).padre;
+                UnionFind.Union(idorigen, iddestino);
+                
                 descubiertos.poner(origen);
                 descubiertos.poner(destino);
             }
         
             
             
-            i++;
+            
         }
         return arbol.size() == (vertices.size() - 1);
         /*
