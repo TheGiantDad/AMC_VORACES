@@ -56,8 +56,8 @@ public class Algoritmos {
                 
                 verticeI = aristaañadida.destino;
                 descubiertos.poner(verticeI);
-                // CUALQUIER OPERACION DEL CONJUNTO TRUCADO ES DEL ORDEN CONSTANTE EN UN CASO MEDIO Y MEJOR 
-                //Y EN UN CASO PEOR DE ORDEN N
+                // CUALQUIER OPERACION DEL CONJUNTO TRUCADO ES DE ORDEN CONSTANTE EN UN CASO MEDIO Y MEJOR 
+                //Y EN UN CASO PEOR DE ORDEN N PUES ES UNA TABLA HASH
                 cVertices.quitar(verticeI);
                 
                 
@@ -106,22 +106,7 @@ public class Algoritmos {
             
         }
         return arbol.size() == (vertices.size() - 1);
-        /*
-        for (int i = 0; i < a.size(); i++) {
-            Punto origen = a.get(i).origen;
-            Punto destino = a.get(i).destino;
-            int idorigen=0,iddestino=0;
-            for (int j = 0; j < vertices.size(); j++) {
-                if(vertices.get(j).equals(origen)) idorigen = j;
-                if(vertices.get(j).equals(destino)) iddestino = j;
-            }
-            if(!(tabla[idorigen].padre.equals(tabla[iddestino].padre))){
-                arbol.add(a.get(i));
-                tabla[idorigen].padre = tabla[iddestino].padre;
-                cVertices.poner(origen);
-                cVertices.poner(destino);
-            }
-        }*/
+        
     }
     
     
@@ -145,7 +130,7 @@ public class Algoritmos {
         while(ar.size()>0){
             a.add(ar.poll());
         }
-        System.out.println("he generado este numero de aristas "+ a.size());
+        //System.out.println("he generado este numero de aristas "+ a.size());
         return a;  
     }
     

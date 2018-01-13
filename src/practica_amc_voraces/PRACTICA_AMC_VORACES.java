@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Scanner;
 
 /**
  *
@@ -23,54 +24,91 @@ public class PRACTICA_AMC_VORACES {
 
     public static void main(String[] args) throws NumberFormatException, IOException {
         
-        System.out.println("empezando main");
+           ArrayList<Punto> t= new ArrayList<Punto>();
+           t=null;
+           Scanner sc = new Scanner(System.in);
+           String fichero;
+           int tamaño;
 
-        ArrayList<Punto> t= new ArrayList<Punto>();
-        t=leerArchivo("ch150.tsp",150);//NOMBRE ARCHIVO + NUMERO DE PUNTOS(TAMAÑO)
-        
-        Algoritmos al=new Algoritmos(t);
-        if(al.Kruskal()==true)System.out.println("true");
-        //if(al.Prim()==true)System.out.println("true");
-        else System.out.println("false");
-        System.out.println(al.arbol.size());
-        
-        
-        
-        
-        
-        for (int i = 0; i < al.arbol.size(); i++) {
-            System.out.println("Origen: "+al.arbol.get(i).origen +" Destino: "+al.arbol.get(i).destino + " Coste: "+al.arbol.get(i).distancia);
+         try {
+            System.out.println("Inserte nombre del archivo TSP a estudiar: ");
+            fichero = sc.nextLine();
+            System.out.println("Inserte tamaño del archivo TSP a estudiar: ");
+            tamaño = sc.nextInt();
+            t=leerArchivo(fichero+".tsp",tamaño);//NOMBRE ARCHIVO + NUMERO DE PUNTOS(TAMAÑO)
+             } catch (Exception e) {System.out.println("Fallo al leer fichero");}
+         
+         
+         if(t!=null){
+               for (int i = 0; i < 15; i++) {//LIMPIAR PANTALLA
+               System.out.println(); 
+            }
+            System.out.println("Menú");
+            System.out.println("----------------");
+            System.out.println("1. Algoritmo de Prim");
+            System.out.println("2. Algoritmo de Kruskal");
+            System.out.println();
+            System.out.print("¿Qué quieres hacer?:  ");
+            Scanner sc2 = new Scanner(System.in);
+            String opcion = sc2.nextLine();
+            switch (opcion) {
+                case "1":{   
+                    Algoritmos al=new Algoritmos(t);
+                    if(al.Prim()==true){
+                        System.out.println("Árbol de recubrimiento minimo encontrado");
+                        System.out.println();
+                        System.out.println("¿Desea generar el árbol(s/n)?: ");
+                        Scanner sc3 = new Scanner(System.in);
+                        String opcion2 = sc3.nextLine();
+                        if(opcion2.equals("s")){
+                            double distancia=0;
+                            for (int i = 0; i < al.arbol.size(); i++) {
+                                distancia=(distancia+al.arbol.get(i).distancia);
+                                System.out.println("Origen: "+al.arbol.get(i).origen +" Destino: "+al.arbol.get(i).destino + " Coste: "+al.arbol.get(i).distancia);
+                             }
+                            System.out.println();
+                            System.out.println("Distancia total: "+distancia);
+                        }
+                        
+                    }
+
+                    
+                    else System.out.println("No ha encontrado el arbol de recubrimiento minimo");
+                    //System.out.println(al.arbol.size());
+
+                    
+                      break;
+                }
+                case "2":   {
+                    Algoritmos al=new Algoritmos(t);
+                    if(al.Kruskal()==true){
+                        System.out.println("Árbol de recubrimiento minimo encontrado");
+                        System.out.println();
+                        System.out.println("¿Desea generar el árbol(s/n)?: ");
+                        Scanner sc3 = new Scanner(System.in);
+                        String opcion2 = sc3.nextLine();
+                        if(opcion2.equals("s")){
+                            double distancia=0;
+                            for (int i = 0; i < al.arbol.size(); i++) {
+                                distancia=(distancia+al.arbol.get(i).distancia);
+                                System.out.println("Origen: "+al.arbol.get(i).origen +" Destino: "+al.arbol.get(i).destino + " Coste: "+al.arbol.get(i).distancia);
+                             }
+                            System.out.println();
+                            System.out.println("Distancia total: "+distancia);
+                        }
+                        
+                    }
+                    
+                    
+                    else System.out.println("No ha encontrado el arbol de recubrimiento minimo");
+                    //System.out.println(al.arbol.size());
+
+                    
+                      break;
+                }
+            }
         }
-        
-        
-        /*
-        ArrayList<Punto> t = new ArrayList<Punto>();
-        Punto p1 =new Punto(1,0);
-        Punto p2 =new Punto(2,0);
-        Punto p3 =new Punto(3,0);
-        Punto p4 =new Punto(4,0);
-        Punto p5 =new Punto(5,0);
-        t.add(p1);
-        t.add(p2);
-        t.add(p3);
-        t.add(p4);
-        t.add(p5);
-        
-        Hashtable<Punto,Boolean> c = new Hashtable<Punto,Boolean>();
-        
-        for (int i = 0; i < t.size(); i++) {
-            c.put(t.get(i), true);
-        }
-        
-        if(c.get(t.get(3))) System.out.println("todo bine");
-        ConjuntoTrucado c = new ConjuntoTrucado(t, false);
-        c.poner(p5);
-        if(c.esta(p5)) System.out.println("todo bien");
-        */
-        
-     
     }
-    
     
     
     public static ArrayList<Punto> leerArchivo(String ruta, int tam)
@@ -100,9 +138,4 @@ public class PRACTICA_AMC_VORACES {
 		br.close();
 		return v;
 	}
-    
-    
-    
-    
-    
-    }
+}
